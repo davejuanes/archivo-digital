@@ -23,19 +23,18 @@ Route::group(['middleware'=> 'auth'],function (){
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-    //***** Nivel Administrador Central *****//
+    //***** Nivel Administrador *****//
     Route::group(['middleware' => ['auth', 'AdministradorCentral']], function () {
         Route::resource('registro_usuario', \App\Http\Controllers\registro_usuario\RegistroController::class);
         Route::resource('listado_usuario',\App\Http\Controllers\registro_usuario\ListadoUsuarioController::class);
         Route::resource('listado_roles', \App\Http\Controllers\registro_usuario\ListadoRolesController::class);
 
-
+        Route::resource('clientes', \App\Http\Controllers\clientes\ClientesController::class);
     });
 
     //***** Nivel Presupuestos *****//
     Route::group(['middleware' => ['auth', 'Presupuestos']], function () {
-
-
+        
     });
 
     //***** Nivel Tesoreria *****//

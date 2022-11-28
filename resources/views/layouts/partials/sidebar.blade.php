@@ -22,7 +22,7 @@
             <div class="main-menu">
                 <nav class="sidebar-nav">
                     <ul class="metismenu show-on-load" id="ul-menu">
-                        <li><a class="bullet" href="{{url('home')}}"><i class="material-icons nav-icon">home</i>INICIO</a></li>
+                        <li><a class="bullet" href="{{url('home')}}"><i class="material-icons nav-icon">home</i>Inicio</a></li>
                         @if (\Illuminate\Support\Facades\Auth::User()->nivel == '1')
                             <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">computer</i>Administrador</a>
                                 <ul class="mm-collapse">
@@ -32,28 +32,20 @@
                                 </ul>
                             </li>
                         @endif
-                        <span class="main-menu-title">ADMINISTRATIVA</span>
-                        @if (\Illuminate\Support\Facades\Auth::User()->nivel == '2' || \Illuminate\Support\Facades\Auth::User()->nivel == '1')
-
-                            <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">account_balance</i>Convenios</a>
+                        <span class="main-menu-title">GESTIÓN DE ARCHIVO</span>
+                        {{-- @if (\Illuminate\Support\Facades\Auth::User()->nivel == '2' || \Illuminate\Support\Facades\Auth::User()->nivel == '1') --}}
+                            <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">account_balance</i>Archivo</a>
                                 <ul class="mm-collapse">
-                                    <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">gavel</i>Contratos de Préstamo</a></li>
+                                    <li><a class="bullet-icon" href="{{ url('clientes') }}"><i class="material-icons nav-icon">gavel</i>Clientes</a></li>
                                 </ul>
                             </li>
-
-                            <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">account_balance</i>Contratos</a>
-                                <ul class="mm-collapse">
-                                    <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">format_list_numbered</i>Listado de Contratos</a></li>
-                                </ul>
-                            </li>
-                        @endif
+                        {{-- @endif --}}
                         @if (\Illuminate\Support\Facades\Auth::User()->nivel == '3' || \Illuminate\Support\Facades\Auth::User()->nivel == '1')
-                            <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">bar_chart</i>Presupuesto</a>
+                            <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">bar_chart</i>Biblioteca</a>
                                 <ul class="mm-collapse">
                                     <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">show_chart</i>Estructura Inicial</a></li>
                                 </ul>
                             </li>
-
                             <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">bar_chart</i>Tesoreria</a>
                                 <ul class="mm-collapse">
                                     <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">payments</i>Depositantes</a></li>
