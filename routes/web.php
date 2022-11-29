@@ -30,6 +30,7 @@ Route::group(['middleware'=> 'auth'],function (){
         Route::resource('listado_roles', \App\Http\Controllers\registro_usuario\ListadoRolesController::class);
 
         Route::resource('clientes', \App\Http\Controllers\clientes\ClientesController::class);
+        Route::resource('casos', \App\Http\Controllers\clientes\CasosController::class);
     });
 
     //***** Nivel Presupuestos *****//
