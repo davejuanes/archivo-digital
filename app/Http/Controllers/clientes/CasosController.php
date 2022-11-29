@@ -83,6 +83,7 @@ class CasosController extends Controller
         ->join('pp_descripcion_parametricas as dp', 'dp.pk_id_descripcion_parametrica', '=', 'documentos.fkp_estado')
         ->select('documentos.pk_id_documento', 'documentos.codigo', 'documentos.contenido', 'documentos.fecha_inicio', 'documentos.fecha_fin', 'dp.descripcion as estado')
         ->where('documentos.activo', 1)
+        ->where('documentos.fk_id_cliente', $id)
         ->orderBy('documentos.pk_id_documento', 'DESC')
         ->get();
 
@@ -91,7 +92,17 @@ class CasosController extends Controller
         ->where('fk_id_parametrica', 47)
         ->get();
 
-        return view('clientes.casos', compact('documentos', 'clientName', 'estados'));
+        $tipos_documentos = Pp_descripcion_parametrica::from('pp_descripcion_parametricas')
+        ->select('pk_id_descripcion_parametrica', 'descripcion')
+        ->where('fk_id_parametrica', 48)
+        ->get();
+
+        $estados_documentos = Pp_descripcion_parametrica::from('pp_descripcion_parametricas')
+        ->select('pk_id_descripcion_parametrica', 'descripcion')
+        ->where('fk_id_parametrica', 49)
+        ->get();
+
+        return view('clientes.casos', compact('documentos', 'clientName', 'estados', 'tipos_documentos', 'estados_documentos'));
     }
 
     /**
@@ -123,7 +134,6 @@ class CasosController extends Controller
         $updateCaso->fecha_inicio = $request->fecha_inicio;
         $updateCaso->fecha_fin = $request->fecha_fin;
         $updateCaso->fkp_estado = $request->fkp_estado;
-        $updateCaso->fk_id_cliente = $request->fk_id_cliente;
 
         $updateCaso->save();
 

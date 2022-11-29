@@ -24,6 +24,12 @@ class CreateArchivosTable extends Migration
             $table->integer('activo')->nullable()->default(1)->comment('ESTADO DEL REGISTRO');
             $table->integer('fk_user')->nullable()->comment('USUARIO REGISTRADOR');
             $table->timestamps();
+
+            $table->integer('fk_id_cliente')->unsigned();
+            $table->foreign('fk_id_cliente')->references('pk_id_cliente')->on('clientes');
+
+            $table->integer('fk_id_documento')->unsigned();
+            $table->foreign('fk_id_documento')->references('pk_id_documento')->on('documentos');
         });
     }
 

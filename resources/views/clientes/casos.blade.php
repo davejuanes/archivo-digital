@@ -130,16 +130,18 @@
                                     </td>
                                     <td></td>
                                     <td width="200px">
-                                        <a href=""
-                                            class="btn btn-raised btn-raised-success btn-sm btn-block" data-toggle="modal" data-target="#addNesAttached{{ $d->pk_id_documento }}" style="margin-bottom: 8px">
+                                        <a href="" class="btn btn-raised btn-raised-success btn-sm btn-block"
+                                            data-toggle="modal" data-target="#editCase{{ $d->pk_id_documento }}"
+                                            style="margin-bottom: 8px">
                                             <span class="fa fa-edit"></span> Editar
                                         </a>
-                                        <div class="modal fade" id="addNesAttached{{ $d->pk_id_documento }}" tabindex="-1"
-                                            role="dialog" aria-labelledby="addNewCardModaltitle" aria-hidden="true">
+                                        <div class="modal fade" id="editCase{{ $d->pk_id_documento }}"
+                                            tabindex="-1" role="dialog" aria-labelledby="addNewCardModaltitle"
+                                            aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <p class="card-title m-0" id="addNewCardModaltitle">Agregar nuevo Documento Adjunto</p>
+                                                        <p class="card-title m-0" id="addNewCardModaltitle">Edición de Casos</p>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -147,39 +149,64 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <form role="form" method="post" class="form-horizontal"
-                                                            action="{{ route('casos.edit', $d->pk_id_documento) }}"
+                                                            action="{{ route('casos.update', $d->pk_id_documento) }}"
                                                             enctype="multipart/form-data">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="input-group with-icon input-light mb-3">
                                                                 <div class="input-group-prepend">
-                                                                    <i class="input-group-text material-icons">person</i>
+                                                                    <i class="input-group-text material-icons">pin</i>
                                                                 </div>
-                                                                <input type="text" class="form-control" name="name"
-                                                                    value="{{ $d->name }}" disabled>
+                                                                <input type="text" class="form-control" name="codigo"
+                                                                    placeholder="NUREJ u otro"
+                                                                    value="{{ $d->codigo }}">
                                                             </div>
                                                             <div class="input-group with-icon input-light mb-3">
                                                                 <div class="input-group-prepend">
-                                                                    <i class="input-group-text material-icons">email</i>
+                                                                    <i class="input-group-text material-icons"><span
+                                                                            class="material-symbols-outlined">
+                                                                            history_edu
+                                                                        </span></i>
                                                                 </div>
-                                                                <input type="email" class="form-control" name="email"
-                                                                    value="{{ $d->email }}" disabled>
+                                                                <textarea class="form-control" name="contenido" id="contenido" cols="30" rows="10"
+                                                                    placeholder="Descripción del documento">{{ $d->contenido }}</textarea>
                                                             </div>
 
                                                             <div class="input-group with-icon input-light mb-3">
                                                                 <div class="input-group-prepend">
-                                                                    <i class="input-group-text material-icons">edit</i>
+                                                                    <i class="input-group-text material-icons">schedule</i>
                                                                 </div>
-                                                                <select class="form-control col-md-4" name="habilitado"
-                                                                    required>
-                                                                    <option selected disabled value="">Seleccionar...
-                                                                    </option>
-                                                                    <option value="1">Habilitado</option>
-                                                                    <option value="0">Deshabilitado</option>
+                                                                <input type="date" class="form-control"
+                                                                    name="fecha_inicio" placeholder="Fecha Inicio"
+                                                                    value="{{ $d->fecha_inicio }}" required>
+                                                                <div class="input-group-prepend">
+                                                                    <i class="input-group-text material-icons">schedule</i>
+                                                                </div>
+                                                                <input type="date" class="form-control"
+                                                                    name="fecha_fin" placeholder="Fecha Final"
+                                                                    value="{{ $d->fecha_fin }}">
+                                                            </div>
+
+                                                            <div class="input-group with-icon input-light mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <i class="input-group-text material-icons">map</i>
+                                                                </div>
+                                                                <select class="form-control" name="fkp_estado"
+                                                                    id="fkp_estado">
+                                                                    @foreach ($estados as $e)
+                                                                        @if ($d->fkp_estado === $e->pk_id_descripcion_parametrica)
+                                                                            <option
+                                                                                value="{{ $e->pk_id_descripcion_parametrica }}"
+                                                                                selected>
+                                                                                {{ $e->descripcion }}</option>
+                                                                        @else
+                                                                            <option
+                                                                                value="{{ $e->pk_id_descripcion_parametrica }}">
+                                                                                {{ $e->descripcion }}</option>
+                                                                        @endif
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
-
-
                                                             <div class="d-flex">
                                                                 <div class="flex-grow-1"></div><button type="button"
                                                                     class="btn btn-opacity btn-danger mr-md"
@@ -193,9 +220,85 @@
                                             </div>
                                         </div>
 
-                                        <a href="{{ url('listado_roles', $d->pk_id_cliente) }}"
-                                            class="btn btn-raised btn-raised-primary btn-sm btn-block"><span
-                                                class="fa fa-users"></span> Adjuntar</a>
+                                        <a href=""
+                                            class="btn btn-raised btn-raised-primary btn-sm btn-block" data-toggle="modal" data-target="#addAttached{{ $d->pk_id_documento }}">
+                                            <span class="fa fa-users"></span> Adjuntar
+                                        </a>
+                                        <div class="modal fade" id="addAttached{{ $d->pk_id_documento }}"
+                                            tabindex="-1" role="dialog" aria-labelledby="addNewCardModaltitle"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <p class="card-title m-0" id="addNewCardModaltitle">Adjuntar archivo</p>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form role="form" method="post" class="form-horizontal"
+                                                            action="{{ url('adjuntos', $d->pk_id_documento) }}"
+                                                            enctype="multipart/form-data">
+                                                            @csrf
+                                                            {{-- @method('PUT') --}}
+                                                            <div class="input-group with-icon input-light mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <i class="input-group-text material-icons">pin</i>
+                                                                    <label for="codigo_archivador">Codigo archivador</label>
+                                                                </div>
+                                                                <input type="text" class="form-control" name="codigo_archivador">
+                                                            </div>
+                                                            <div class="input-group with-icon input-light mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <i class="input-group-text material-icons"><span
+                                                                            class="material-symbols-outlined">
+                                                                            history_edu
+                                                                        </span></i>
+                                                                        <label for="ubicacion">Ubicacion</label>
+                                                                </div>
+                                                                <input class="form-control" type="text" name="ubicacion" placeholder="Estante 1 Balda 2">
+                                                            </div>
+
+                                                            <div class="input-group with-icon input-light mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <i class="input-group-text material-icons">schedule</i>
+                                                                </div>
+                                                                <select name="fkp_tipo_documento" id="fkp_tipo_documento">
+                                                                    <option value="">Tipo de documento</option>
+                                                                    @foreach ($tipos_documentos as $td)
+                                                                        <option value="{{ $td->pk_id_descripcion_parametrica }}">{{ $td->descripcion }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                                <div class="input-group-prepend">
+                                                                    <i class="input-group-text material-icons">schedule</i>
+                                                                </div>
+                                                                <select name="fkp_tipo_documento" id="fkp_tipo_documento">
+                                                                    <option value="">Estado del Documento</option>
+                                                                    @foreach ($estados_documentos as $ed)
+                                                                        <option value="{{ $ed->pk_id_descripcion_parametrica }}">{{ $ed->descripcion }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+
+                                                            <div class="input-group with-icon input-light mb-3">
+                                                                <div class="input-group-prepend">
+                                                                    <i class="input-group-text material-icons">map</i>
+                                                                </div>
+                                                                <input type="date" name="fecha_archivo" class="form-control">
+                                                            </div>
+                                                            <div class="d-flex">
+                                                                <div class="flex-grow-1"></div><button type="button"
+                                                                    class="btn btn-opacity btn-danger mr-md"
+                                                                    data-dismiss="modal">Cancelar</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-flat btn-primary">Guardar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <a href="" class="btn btn-raised btn-raised-warning btn-sm btn-block"
                                             data-toggle="modal" data-target="#addNewCardModal{{ $d->pk_id_cliente }}">
