@@ -81,8 +81,9 @@ class CasosController extends Controller
 
         $documentos = Documento::from('documentos')
         ->join('pp_descripcion_parametricas as dp', 'dp.pk_id_descripcion_parametrica', '=', 'documentos.fkp_estado')
-        ->select('documentos.codigo', 'documentos.contenido', 'documentos.fecha_inicio', 'documentos.fecha_fin', 'dp.descripcion as estado')
+        ->select('documentos.pk_id_documento', 'documentos.codigo', 'documentos.contenido', 'documentos.fecha_inicio', 'documentos.fecha_fin', 'dp.descripcion as estado')
         ->where('documentos.activo', 1)
+        ->orderBy('documentos.pk_id_documento', 'DESC')
         ->get();
 
         $estados = Pp_descripcion_parametrica::from('pp_descripcion_parametricas')
@@ -100,6 +101,18 @@ class CasosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
         $userId = Auth::user()->id;
 
@@ -121,18 +134,6 @@ class CasosController extends Controller
             Toastr::error('Error al procesar los datos...', 'Error');
             return redirect()->back();
         }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
