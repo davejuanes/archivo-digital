@@ -4,7 +4,9 @@ namespace App\Http\Controllers\clientes;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Cliente;
 use PDF;
+use DB;
 
 class ClientePdfController extends Controller
 {
@@ -47,7 +49,25 @@ class ClientePdfController extends Controller
      */
     public function show($id)
     {
-        $pdf = Pdf::loadView('clientes/cliente_pdf');
+        $cliente = Cliente::from('clientes')
+        ->select('*')
+        ->where('pk_id_cliente', $id)
+        ->first();
+
+        $documentos = DB::table('documentos as d')
+        ->join('pp_descripcion_parametricas as dp', 'dp.pk_id_descripcion_parametrica', '=', 'd.fkp_estado')
+        ->select('d.*', 'dp.descripcion as estado')
+        ->where('d.fk_id_cliente', $id)
+        ->get();
+
+        $archivos = DB::table('archivos as a')
+        ->join('pp_descripcion_parametricas as dp', 'dp.pk_id_descripcion_parametrica', '=', 'a.fkp_tipo_documento')
+        ->join('pp_descripcion_parametricas as dp1', 'dp1.pk_id_descripcion_parametrica', '=', 'a.fkp_estado_documento')
+        ->select('a.*', 'dp.descripcion as tipo_documento', 'dp1.descripcion as estado_documento')
+        ->where('a.fk_id_cliente', $id)
+        ->get();
+
+        $pdf = Pdf::loadView('clientes/cliente_pdf', compact('cliente', 'documentos', 'archivos'));
         return $pdf->stream();
     }
 
