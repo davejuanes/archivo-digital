@@ -128,7 +128,11 @@
                                     <td style="text-align: center">
                                         {{ $d->estado }}
                                     </td>
-                                    <td></td>
+                                    <td>
+                                        @foreach ($archivos as $a)
+                                            <a href="{{ asset($a->ruta) }}" target="_blank">{{ $a->tipo_documento }}</a><button class="btn btn-xs btn-success"><i class="material-icons">edit</i></button><br>
+                                        @endforeach
+                                    </td>
                                     <td width="200px">
                                         <a href="" class="btn btn-raised btn-raised-success btn-sm btn-block"
                                             data-toggle="modal" data-target="#editCase{{ $d->pk_id_documento }}"
@@ -258,7 +262,7 @@
                                                                 <div class="invalid-feedback">Este campo es obligatorio.</div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="ubicacion">Tipo de documento:</label>
+                                                                <label for="fkp_tipo_documento">Tipo de documento:</label>
                                                                 <select name="fkp_tipo_documento" id="fkp_tipo_documento">
                                                                     <option value="">Seleccionar</option>
                                                                     @foreach ($tipos_documentos as $td)
@@ -271,8 +275,8 @@
                                                                 <div class="invalid-feedback">Este campo es obligatorio.</div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="ubicacion">Estado del documento:</label>
-                                                                <select name="fkp_tipo_documento" id="fkp_tipo_documento">
+                                                                <label for="fkp_estado_documento">Estado del documento:</label>
+                                                                <select name="fkp_estado_documento" id="fkp_estado_documento">
                                                                     <option value="">Seleccionar</option>
                                                                     @foreach ($estados_documentos as $ed)
                                                                         <option

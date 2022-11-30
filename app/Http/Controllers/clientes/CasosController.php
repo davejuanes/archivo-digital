@@ -103,12 +103,13 @@ class CasosController extends Controller
         ->where('fk_id_parametrica', 3)
         ->get();
 
-        $adjuntos = Archivo::from('archivos')
-        ->select('*')
-        ->where('fk_id_cliente', $id)
+        $archivos = DB::table('archivos as a')
+        ->join('pp_descripcion_parametricas as dp', 'dp.pk_id_descripcion_parametrica', '=', 'a.fkp_tipo_documento')
+        ->select('a.*', 'dp.descripcion as tipo_documento')
+        ->where('a.fk_id_cliente', $id)
         ->get();
 
-        return view('clientes.casos', compact('documentos', 'clientName', 'estados', 'tipos_documentos', 'estados_documentos'));
+        return view('clientes.casos', compact('documentos', 'clientName', 'estados', 'tipos_documentos', 'estados_documentos', 'archivos'));
     }
 
     /**
