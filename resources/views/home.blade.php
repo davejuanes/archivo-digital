@@ -55,10 +55,10 @@
                                     <div class="card-body d-flex align-items-center">
                                         <div class="ul-cryptocurrency-card d-flex flex-grow-1 justify-content-between align-items-center">
                                             <div>
-                                                <p class="m-0 text-white">300.57</p>
-                                                <div class="card-title text-white m-0">459.32 USDT</div>
+                                                <p class="m-0 text-white">Usuarios</p>
+                                                <div class="card-title text-white m-0">5</div>
                                             </div>
-                                            <i class="material-icons">monetization_on</i>
+                                            <i class="material-icons">settings_accessibility</i>
                                         </div>
                                     </div>
                                 </div>
@@ -68,10 +68,10 @@
                                     <div class="card-body d-flex align-items-center">
                                         <div class="ul-cryptocurrency-card d-flex flex-grow-1 justify-content-between align-items-center">
                                             <div>
-                                                <p class="m-0 text-white">24H Charge</p>
-                                                <div class="card-title text-white m-0">743.930 USDT</div>
+                                                <p class="m-0 text-white">Clientes</p>
+                                                <div class="card-title text-white m-0">3</div>
                                             </div>
-                                            <i class="material-icons">monetization_on</i>
+                                            <i class="material-icons">emoji_people</i>
                                         </div>
                                     </div>
                                 </div>
@@ -81,10 +81,10 @@
                                     <div class="card-body d-flex align-items-center">
                                         <div class="ul-cryptocurrency-card d-flex flex-grow-1 justify-content-between align-items-center">
                                             <div>
-                                                <p class="m-0 text-white">42H Charge</p>
-                                                <div class="card-title text-white m-0">1074.3930 USDT</div>
+                                                <p class="m-0 text-white">Documentos</p>
+                                                <div class="card-title text-white m-0">12</div>
                                             </div>
-                                            <i class="material-icons">monetization_on</i>
+                                            <i class="material-icons">folder_open</i>
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 mb-md">
+            {{-- <div class="col-lg-4 mb-md">
                 <div class="ul-cryptocurrency-tab">
                     <div class="nav-pills-primary">
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -397,7 +397,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-lg-3 mb-md">
                 <div class="card">
                     <div class="card-header justify-content-between align-items-center flex-wrap">

@@ -32,6 +32,7 @@ Route::group(['middleware'=> 'auth'],function (){
         Route::resource('clientes', \App\Http\Controllers\clientes\ClientesController::class);
         Route::resource('casos', \App\Http\Controllers\clientes\CasosController::class);
         Route::resource('adjuntos', \App\Http\Controllers\clientes\AdjuntosController::class);
+        Route::resource('cliente_pdf', \App\Http\Controllers\clientes\ClientePdfController::class);
     });
 
     //***** Nivel Presupuestos *****//

@@ -105,9 +105,9 @@
                                     <td width="200px">
                                         <a href="{{ url('casos', $c->pk_id_cliente) }}" class="btn btn-raised btn-raised-success btn-sm btn-block"><span
                                                 class="fa fa-edit"></span> Casos</a>
-                                        <a href="{{ url('listado_roles', $c->pk_id_cliente) }}"
+                                        <a href="{{ url('cliente_pdf', $c->pk_id_cliente) }}"
                                             class="btn btn-raised btn-raised-primary btn-sm btn-block"><span
-                                                class="fa fa-users"></span> Cambiar Rol</a>
+                                                class="fa fa-file"></span> Reporte</a>
 
                                         <a href="" class="btn btn-raised btn-raised-warning btn-sm btn-block"
                                             data-toggle="modal" data-target="#addNewCardModal{{ $c->pk_id_cliente }}"><span

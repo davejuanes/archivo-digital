@@ -24,7 +24,7 @@
     <div data-perfect-scrollbar='' data-suppress-scroll-x='true'>
         <div class="d-flex flex-column align-items-center mt-lg mb-xxl">
             <img class="card-img-top signup" src="{{asset('assets/images/arctic-admin.svg')}}" style="height: 100px" alt="Card image cap">
-            <span class="text-primary text-18 d-block font-weight-bold">Archivo Digital</span>
+            <span class="text-primary text-18 d-block font-weight-bold">Contención Digital</span>
             <span class="mb-md text-muted mb-lg d-block">Iniciar sesión con su cuenta</span>
         </div>
         <form method="POST" action="{{ route('login') }}">

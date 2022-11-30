@@ -7,7 +7,7 @@
         <div></div>
         <span></span>
     </div>
-    <div class="brand"><img src="{{asset('assets/images/arctic-admin-circle.svg')}}" alt=""/><span class="app-logo-text ml-2 text-20">Archivo Digital</span></div>
+    <div class="brand"><img src="{{asset('assets/images/arctic-admin-circle.svg')}}" alt=""/><span class="app-logo-text ml-2 text-20">Contención Digital</span></div>
     <!-- Start:: user-->
     <div class="scroll-nav" data-perfect-scrollbar="" data-suppress-scroll-x="true">
         <div class="app-user text-center">
@@ -43,18 +43,18 @@
                         @if (\Illuminate\Support\Facades\Auth::User()->nivel == '3' || \Illuminate\Support\Facades\Auth::User()->nivel == '1')
                             <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">bar_chart</i>Biblioteca</a>
                                 <ul class="mm-collapse">
-                                    <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">show_chart</i>Estructura Inicial</a></li>
+                                    <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">show_chart</i>Normativas</a></li>
                                 </ul>
                             </li>
-                            <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">bar_chart</i>Tesoreria</a>
+                            {{-- <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">bar_chart</i>Tesoreria</a>
                                 <ul class="mm-collapse">
                                     <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">payments</i>Depositantes</a></li>
                                     <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">book</i>Libretas</a></li>
                                     <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">menu_open</i>Componentes C-21</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
-                            <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">payments</i>Contabilidad</a>
+                            {{-- <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">payments</i>Contabilidad</a>
                                 <ul class="mm-collapse">
                                     <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">credit_card</i>Tarjeta de inversion</a></li>
                                 </ul>
@@ -66,11 +66,11 @@
                                     <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">library_books</i>Proyecto</a></li>
                                     <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">waterfall_chart</i>Estado de Inversión</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
                         @endif
                         <span class="main-menu-title">CONFIGURACION</span>
-                        <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">done_all</i>Selección de Clasificadores</a>
+                        {{-- <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">done_all</i>Selección de Clasificadores</a>
                             <ul class="mm-collapse">
                                 <li><a href=""><i class="bullet-icon"></i>Institucional</a></li>
                                 <li><a href=""><i class="bullet-icon"></i>Rubros</a></li>
@@ -83,10 +83,10 @@
                                 <li><a href=""><i class="bullet-icon"></i>Dirección Administrativa</a></li>
                                 <li><a href=""><i class="bullet-icon"></i>Programa Presupuestario</a></li>
                             </ul>
-                        </li>
-                        <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">settings</i>Configuraciones de Usuario</a>
+                        </li> --}}
+                        <li><a class="has-arrow" href="#"><i class="material-icons nav-icon">settings</i>Parametrización de sistema</a>
                             <ul class="mm-collapse">
-                                <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">check_box</i>Selección de Proyectos</a></li>
+                                <li><a class="bullet-icon" href="#"><i class="material-icons nav-icon">check_box</i>Parametricas</a></li>
                             </ul>
                         </li>
 
