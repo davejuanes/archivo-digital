@@ -135,13 +135,13 @@
                                             style="margin-bottom: 8px">
                                             <span class="fa fa-edit"></span> Editar
                                         </a>
-                                        <div class="modal fade" id="editCase{{ $d->pk_id_documento }}"
-                                            tabindex="-1" role="dialog" aria-labelledby="addNewCardModaltitle"
-                                            aria-hidden="true">
+                                        <div class="modal fade" id="editCase{{ $d->pk_id_documento }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="addNewCardModaltitle" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <p class="card-title m-0" id="addNewCardModaltitle">Edición de Casos</p>
+                                                        <p class="card-title m-0" id="addNewCardModaltitle">Edición de
+                                                            Casos</p>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -220,17 +220,18 @@
                                             </div>
                                         </div>
 
-                                        <a href=""
-                                            class="btn btn-raised btn-raised-primary btn-sm btn-block" data-toggle="modal" data-target="#addAttached{{ $d->pk_id_documento }}">
+                                        <a href="" style="margin-bottom: 8px"
+                                            class="btn btn-raised btn-raised-primary btn-sm btn-block" data-toggle="modal"
+                                            data-target="#addAttached{{ $d->pk_id_documento }}">
                                             <span class="fa fa-users"></span> Adjuntar
                                         </a>
-                                        <div class="modal fade" id="addAttached{{ $d->pk_id_documento }}"
-                                            tabindex="-1" role="dialog" aria-labelledby="addNewCardModaltitle"
-                                            aria-hidden="true">
+                                        <div class="modal fade" id="addAttached{{ $d->pk_id_documento }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="addNewCardModaltitle" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <p class="card-title m-0" id="addNewCardModaltitle">Adjuntar archivo</p>
+                                                        <p class="card-title m-0" id="addNewCardModaltitle">Adjuntar
+                                                            archivo</p>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -238,54 +239,62 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <form role="form" method="post" class="form-horizontal"
-                                                            action="{{ url('adjuntos', $d->pk_id_documento) }}"
+                                                            action="{{ url('adjuntos') }}"
                                                             enctype="multipart/form-data">
                                                             @csrf
                                                             {{-- @method('PUT') --}}
-                                                            <div class="input-group with-icon input-light mb-3">
-                                                                <div class="input-group-prepend">
-                                                                    <i class="input-group-text material-icons">pin</i>
-                                                                    <label for="codigo_archivador">Codigo archivador</label>
-                                                                </div>
-                                                                <input type="text" class="form-control" name="codigo_archivador">
+                                                            <input type="hidden" name="fk_id_documento" value="{{ $d->pk_id_documento }}">
+                                                            <input type="hidden" name="fk_id_cliente" value="{{ $clientName->pk_id_cliente }}">
+                                                            <div class="form-group">
+                                                                <label for="codigo_archivador">Codigo archivador:</label>
+                                                                <input type="text" class="form-control" name="codigo_archivador" required pattern="[A-Za-z0-9]+">
+                                                                <div class="valid-tooltip">Correcto!</div>
+                                                                <div class="invalid-feedback">Este campo es obligatorio.</div>
                                                             </div>
-                                                            <div class="input-group with-icon input-light mb-3">
-                                                                <div class="input-group-prepend">
-                                                                    <i class="input-group-text material-icons"><span
-                                                                            class="material-symbols-outlined">
-                                                                            history_edu
-                                                                        </span></i>
-                                                                        <label for="ubicacion">Ubicacion</label>
-                                                                </div>
-                                                                <input class="form-control" type="text" name="ubicacion" placeholder="Estante 1 Balda 2">
+                                                            <div class="form-group">
+                                                                <label for="ubicacion">Ubicación:</label>
+                                                                <input type="text" class="form-control" name="ubicacion" required pattern="[A-Za-z0-9]+">
+                                                                <div class="valid-tooltip">Correcto!</div>
+                                                                <div class="invalid-feedback">Este campo es obligatorio.</div>
                                                             </div>
-
-                                                            <div class="input-group with-icon input-light mb-3">
-                                                                <div class="input-group-prepend">
-                                                                    <i class="input-group-text material-icons">schedule</i>
-                                                                </div>
+                                                            <div class="form-group">
+                                                                <label for="ubicacion">Tipo de documento:</label>
                                                                 <select name="fkp_tipo_documento" id="fkp_tipo_documento">
-                                                                    <option value="">Tipo de documento</option>
+                                                                    <option value="">Seleccionar</option>
                                                                     @foreach ($tipos_documentos as $td)
-                                                                        <option value="{{ $td->pk_id_descripcion_parametrica }}">{{ $td->descripcion }}</option>
+                                                                        <option
+                                                                            value="{{ $td->pk_id_descripcion_parametrica }}">
+                                                                            {{ $td->descripcion }}</option>
                                                                     @endforeach
                                                                 </select>
-                                                                <div class="input-group-prepend">
-                                                                    <i class="input-group-text material-icons">schedule</i>
-                                                                </div>
+                                                                <div class="valid-tooltip">Correcto!</div>
+                                                                <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="ubicacion">Estado del documento:</label>
                                                                 <select name="fkp_tipo_documento" id="fkp_tipo_documento">
-                                                                    <option value="">Estado del Documento</option>
+                                                                    <option value="">Seleccionar</option>
                                                                     @foreach ($estados_documentos as $ed)
-                                                                        <option value="{{ $ed->pk_id_descripcion_parametrica }}">{{ $ed->descripcion }}</option>
+                                                                        <option
+                                                                            value="{{ $ed->pk_id_descripcion_parametrica }}">
+                                                                            {{ $ed->descripcion }}</option>
                                                                     @endforeach
                                                                 </select>
+                                                                <div class="valid-tooltip">Correcto!</div>
+                                                                <div class="invalid-feedback">Este campo es obligatorio.</div>
                                                             </div>
 
-                                                            <div class="input-group with-icon input-light mb-3">
-                                                                <div class="input-group-prepend">
-                                                                    <i class="input-group-text material-icons">map</i>
-                                                                </div>
-                                                                <input type="date" name="fecha_archivo" class="form-control">
+                                                            <div class="form-group">
+                                                                <label for="fecha_archivo">Fecha archivo:</label>
+                                                                <input type="date" class="form-control" name="fecha_archivo" required pattern="[A-Za-z0-9]+">
+                                                                <div class="valid-tooltip">Correcto!</div>
+                                                                <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="archivo_adjunto">Archivo escaneado:</label>
+                                                                <input type="file" class="form-control" name="archivo_adjunto" required pattern="[A-Za-z0-9]+">
+                                                                <div class="valid-tooltip">Correcto!</div>
+                                                                <div class="invalid-feedback">Este campo es obligatorio.</div>
                                                             </div>
                                                             <div class="d-flex">
                                                                 <div class="flex-grow-1"></div><button type="button"

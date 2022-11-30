@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 use Auth;
+use App\Models\Adjunto;
 use Brian2694\Toastr\Facades\Toastr;
 
 class ClientesController extends Controller

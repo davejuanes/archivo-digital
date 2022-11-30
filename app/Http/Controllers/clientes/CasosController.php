@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Documento;
 use App\Models\Cliente;
+use App\Models\Archivo;
 use App\Models\Pp_descripcion_parametrica;
 use DB;
 use Auth;
@@ -89,17 +90,22 @@ class CasosController extends Controller
 
         $estados = Pp_descripcion_parametrica::from('pp_descripcion_parametricas')
         ->select('pk_id_descripcion_parametrica', 'descripcion')
-        ->where('fk_id_parametrica', 47)
+        ->where('fk_id_parametrica', 1)
         ->get();
 
         $tipos_documentos = Pp_descripcion_parametrica::from('pp_descripcion_parametricas')
         ->select('pk_id_descripcion_parametrica', 'descripcion')
-        ->where('fk_id_parametrica', 48)
+        ->where('fk_id_parametrica', 2)
         ->get();
 
         $estados_documentos = Pp_descripcion_parametrica::from('pp_descripcion_parametricas')
         ->select('pk_id_descripcion_parametrica', 'descripcion')
-        ->where('fk_id_parametrica', 49)
+        ->where('fk_id_parametrica', 3)
+        ->get();
+
+        $adjuntos = Archivo::from('archivos')
+        ->select('*')
+        ->where('fk_id_cliente', $id)
         ->get();
 
         return view('clientes.casos', compact('documentos', 'clientName', 'estados', 'tipos_documentos', 'estados_documentos'));
