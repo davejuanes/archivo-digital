@@ -337,13 +337,13 @@
                                                             <input type="hidden" name="fk_id_cliente" value="{{ $clientName->pk_id_cliente }}">
                                                             <div class="form-group">
                                                                 <label for="codigo_archivador">Codigo archivador:</label>
-                                                                <input type="text" class="form-control" name="codigo_archivador" required pattern="[A-Za-z0-9]+">
+                                                                <input type="text" class="form-control" name="codigo_archivador" required {{-- pattern="[A-Za-z0-9]+" --}}>
                                                                 <div class="valid-tooltip">Correcto!</div>
                                                                 <div class="invalid-feedback">Este campo es obligatorio.</div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="ubicacion">Ubicación:</label>
-                                                                <input type="text" class="form-control" name="ubicacion" required pattern="[A-Za-z0-9]+">
+                                                                <input type="text" class="form-control" name="ubicacion" required {{-- pattern="[A-Za-z0-9]+" --}}>
                                                                 <div class="valid-tooltip">Correcto!</div>
                                                                 <div class="invalid-feedback">Este campo es obligatorio.</div>
                                                             </div>
@@ -376,13 +376,13 @@
 
                                                             <div class="form-group">
                                                                 <label for="fecha_archivo">Fecha archivo:</label>
-                                                                <input type="date" class="form-control" name="fecha_archivo" required pattern="[A-Za-z0-9]+">
+                                                                <input type="date" class="form-control" name="fecha_archivo" required {{-- pattern="[A-Za-z0-9]+" --}}>
                                                                 <div class="valid-tooltip">Correcto!</div>
                                                                 <div class="invalid-feedback">Este campo es obligatorio.</div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="archivo_adjunto">Archivo escaneado:</label>
-                                                                <input type="file" class="form-control" name="archivo_adjunto" required pattern="[A-Za-z0-9]+">
+                                                                <input type="file" class="form-control" name="archivo_adjunto" required {{-- pattern="[A-Za-z0-9]+" --}}>
                                                                 <div class="valid-tooltip">Correcto!</div>
                                                                 <div class="invalid-feedback">Este campo es obligatorio.</div>
                                                             </div>
