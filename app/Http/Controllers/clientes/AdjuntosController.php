@@ -108,7 +108,39 @@ class AdjuntosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd('update');
+        $userId = Auth::user()->id;
+
+        $updateAttached = Archivo::find($id);
+
+        $updateAttached->codigo_archivador = $request->codigo_archivador;
+        $updateAttached->ubicacion = $request->ubicacion;
+        $updateAttached->fkp_tipo_documento = $request->fkp_tipo_documento;
+        $updateAttached->fkp_estado_documento = $request->fkp_estado_documento;
+        $updateAttached->fecha_archivo = $request->fecha_archivo;
+
+        $file=$request->file("archivo_adjunto");
+        $typeFile = $file->getMimeType();
+        $extension = $request->file('archivo_adjunto')->getClientOriginalExtension();
+
+        $file_name = "archivo_".time(). '.' . $extension;
+        $route = public_path('archivos/'.$file_name);
+
+        $updateAttached->ruta = 'archivos/'.$file_name;
+        $updateAttached->fk_id_documento = $request->fk_id_documento;
+        $updateAttached->fk_id_cliente = $request->fk_id_cliente;
+        $updateAttached->fk_user = $userId;
+
+        copy($file, $route);
+
+        $updateAttached->save();
+
+        if ($updateAttached->save()) {
+            Toastr::success('Proceso almacenado correctamente.', 'Archivo cargado');
+            return redirect()->back();
+        } else {
+            Toastr::error('Error al procesar los datos...', 'Error');
+            return redirect()->back();
+        }
     }
 
     /**

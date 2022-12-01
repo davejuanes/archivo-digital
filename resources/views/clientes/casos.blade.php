@@ -130,7 +130,93 @@
                                     </td>
                                     <td>
                                         @foreach ($archivos as $a)
-                                            <a href="{{ asset($a->ruta) }}" target="_blank">{{ $a->tipo_documento }}</a><button class="btn btn-xs btn-success"><i class="material-icons">edit</i></button><br>
+                                            <a href="{{ asset($a->ruta) }}" target="_blank">{{ $a->tipo_documento }}</a>
+                                            <button class="btn btn-xs" data-toggle="modal" data-target="#editAttached{{ $a->pk_id_archivo }}">
+                                                <i class="material-icons" style="font-size: 16px">edit</i>
+                                            </button><br>
+                                            <div class="modal fade" id="editAttached{{ $a->pk_id_archivo }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="addNewCardModaltitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <p class="card-title m-0" id="addNewCardModaltitle">Adjuntar
+                                                                archivo</p>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form role="form" method="post" class="form-horizontal"
+                                                                action="{{ route('adjuntos.update', $a->pk_id_archivo) }}"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <input type="hidden" name="fk_id_documento" value="{{ $d->pk_id_documento }}">
+                                                                <input type="hidden" name="fk_id_cliente" value="{{ $clientName->pk_id_cliente }}">
+                                                                <div class="form-group">
+                                                                    <label for="codigo_archivador">Codigo archivador:</label>
+                                                                    <input type="text" class="form-control" name="codigo_archivador" required pattern="[A-Za-z0-9]+">
+                                                                    <div class="valid-tooltip">Correcto!</div>
+                                                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="ubicacion">Ubicación:</label>
+                                                                    <input type="text" class="form-control" name="ubicacion" required pattern="[A-Za-z0-9]+">
+                                                                    <div class="valid-tooltip">Correcto!</div>
+                                                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="fkp_tipo_documento">Tipo de documento:</label>
+                                                                    <select name="fkp_tipo_documento" id="fkp_tipo_documento">
+                                                                        <option value="">Seleccionar</option>
+                                                                        @foreach ($tipos_documentos as $td)
+                                                                            <option
+                                                                                value="{{ $td->pk_id_descripcion_parametrica }}">
+                                                                                {{ $td->descripcion }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    <div class="valid-tooltip">Correcto!</div>
+                                                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="fkp_estado_documento">Estado del documento:</label>
+                                                                    <select name="fkp_estado_documento" id="fkp_estado_documento">
+                                                                        <option value="">Seleccionar</option>
+                                                                        @foreach ($estados_documentos as $ed)
+                                                                            <option
+                                                                                value="{{ $ed->pk_id_descripcion_parametrica }}">
+                                                                                {{ $ed->descripcion }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    <div class="valid-tooltip">Correcto!</div>
+                                                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                                                </div>
+    
+                                                                <div class="form-group">
+                                                                    <label for="fecha_archivo">Fecha archivo:</label>
+                                                                    <input type="date" class="form-control" name="fecha_archivo" required pattern="[A-Za-z0-9]+">
+                                                                    <div class="valid-tooltip">Correcto!</div>
+                                                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="archivo_adjunto">Archivo escaneado:</label>
+                                                                    <input type="file" class="form-control" name="archivo_adjunto" required pattern="[A-Za-z0-9]+">
+                                                                    <div class="valid-tooltip">Correcto!</div>
+                                                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                                                </div>
+                                                                <div class="d-flex">
+                                                                    <div class="flex-grow-1"></div><button type="button"
+                                                                        class="btn btn-opacity btn-danger mr-md"
+                                                                        data-dismiss="modal">Cancelar</button>
+                                                                    <button type="submit"
+                                                                        class="btn btn-flat btn-primary">Guardar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     </td>
                                     <td width="200px">

@@ -22,8 +22,8 @@ class ClientesController extends Controller
 
         $clients = Cliente::from('clientes')
         ->select('*')
-        ->where('activo', 1)
         ->where('fk_user', $userId)
+        ->orderBy('pk_id_cliente', 'DESC')
         ->get();
 
         return view('clientes.clientes', compact('clients'));
@@ -77,7 +77,7 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        return view('clientes.clientes');
+        //
     }
 
     /**
@@ -88,7 +88,26 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $userId = Auth::user()->id;
+
+        $client = Cliente::find($id);
+
+        if ($client->activo === 1) {
+            $client->activo = 0;
+        } elseif ($client->activo === 0) {
+            $client->activo = 1;
+        }
+        $client->fk_user = $userId;
+
+        $client->save();
+        
+        if ($client->save()) {
+            Toastr::success('Solicitud procesada correctamente.', 'Estado de usuario actualizado');
+            return redirect()->back();
+        } else {
+            Toastr::error('Error al procesar los datos...', 'Error');
+            return redirect()->back();
+        }
     }
 
     /**
